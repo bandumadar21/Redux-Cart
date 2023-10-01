@@ -22,7 +22,7 @@ export function Cart(){
          
              products.map((product)=>(
                 <tr className="mt-2">
-                    <td><img src={product.image} width="100" height="100"/></td>
+                    <td><img src={product.image} alt="not found" width="100" height="100"/></td>
                     <td>{product.title}</td>
                     <td className="me-5" >${product.price}</td>
                     <td className="btn btn-danger me-3 py-2 mt-4" onClick={()=>dispatch(removeCart(product))}>Remove</td>

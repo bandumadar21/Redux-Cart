@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { CartReducer, addCart,removeCart } from "../store/cartSlice";
-import { Cart } from "./Cart";
+import { addCart,removeCart } from "../store/cartSlice";
+
 import { useEffect, useState } from "react";
 
 export function Card({product}){
@@ -19,11 +19,11 @@ export function Card({product}){
     {
         setIsInCart(false)
     }
-  },[cartItems])
+  },[cartItems,product.id])
 
     return(
         <div className="card d-flex flex-wrap w-25 text-center  m-4">
-            <img style={{textAlign:'center'}} src={product.image} width="300" height="400" className="card-image-top ps-5"/>
+            <img style={{textAlign:'center'}} src={product.image} alt="not found" width="300" height="400" className="card-image-top ps-5"/>
              <div className="card-header" style={{height:'80px'}}>
                 <p>{product.title}</p>
              </div>
