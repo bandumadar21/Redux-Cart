@@ -2,15 +2,15 @@ import { Link, NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo512.png';
 import '../components/Header.css';
-import { useContext } from 'react';
-import { cartContext } from '../context/CartContext';
-import { Cart } from './Cart';
+import { useSelector } from 'react-redux';
+
+
 export function Header(){
-const{cartItems}=useContext(cartContext);
+
 const navigate=useNavigate();
-function handleButton()
-{
-    navigate("/cart");
+const products=useSelector(state=>state.cartState.cartItems);
+function handleButton(){
+    navigate("/Cart");
 }
     return(
         <div className=' mx-auto d-flex flex-wrap justify-content-between' style={{height:'80px',border:'1px solid green'}}>
@@ -25,7 +25,7 @@ function handleButton()
             <span className='me-4'><NavLink style={{textDecoration:'none',color:'black'}} to="/cart">Cart</NavLink></span>
            </div>
            <div className='p-4 me-5 fs-5'>
-            <span onClick={handleButton} className='btn bi bi-cart4 position-relative'><span className='badge position-absolute rounded-pill bg-danger'>{cartItems.length}</span></span>
+            <span onClick={handleButton} className='btn bi bi-cart4 position-relative'><span className='badge position-absolute rounded-pill bg-danger'>{products.length}</span></span>
            </div>
         </div>
     )   

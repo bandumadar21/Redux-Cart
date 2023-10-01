@@ -1,20 +1,26 @@
-import { useContext, useEffect, useState } from "react"
-import { cartContext } from "../context/CartContext"
+import { useDispatch, useSelector } from "react-redux"
+import { CartReducer, addCart,removeCart } from "../store/cartSlice";
+import { Cart } from "./Cart";
+import { useEffect, useState } from "react";
 
 export function Card({product}){
-  const{addToCart,cartItems,removeCart}=useContext(cartContext);
-  const[isInCart,setIsInCart]=useState(false);
+    const dispatch=useDispatch(); 
+
+  const [isInCart,setIsInCart]=useState(false);
+  const cartItems=useSelector(state=>state.cartState.cartItems);
+ 
   useEffect(()=>{
-    const productIsInCart=cartItems.find((items)=>items.id===product.id)
-    if(productIsInCart)
+    const checkCart=cartItems.find(item=>item.id===product.id);
+    if(checkCart)
     {
         setIsInCart(true);
     }
     else
     {
-        setIsInCart(false); 
+        setIsInCart(false)
     }
   },[cartItems])
+
     return(
         <div className="card d-flex flex-wrap w-25 text-center  m-4">
             <img style={{textAlign:'center'}} src={product.image} width="300" height="400" className="card-image-top ps-5"/>
@@ -24,9 +30,9 @@ export function Card({product}){
              <div className="card-footer d-flex justify-content-between align-items-end ">
                 <span className="badge bg-primary py-3" ><strong>Price:$</strong>{product.price}</span>
                 {
-                    !isInCart?(<span className="btn btn-primary" onClick={()=>addToCart(product)}>Add Cart</span>):(<span className="btn btn-danger" onClick={()=>removeCart(product)}>Remove</span>)
+                    !isInCart?( <span className="btn btn-primary" onClick={()=>dispatch(addCart(product))} >Add to Cart</span>):( <span className="btn btn-danger" onClick={()=>dispatch(removeCart(product))} >Remove Cart</span>)
                 }
-                
+              
              </div>
         </div>
     )
