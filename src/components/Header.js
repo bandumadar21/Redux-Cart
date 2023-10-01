@@ -16,7 +16,7 @@ function handleButton(){
         <div className=' mx-auto d-flex flex-wrap justify-content-between' style={{height:'80px',border:'1px solid green'}}>
            <div className="header  d-flex flex-wrap" >
             <Link to="/">
-            <img src={logo} alt="Image Not found" className='' width="80" height="80"/>
+            <img src={logo} alt="Not found" className='' width="80" height="80"/>
             </Link>
             <p className='p-3 fs-3'>Shopping Cart</p>
            </div>
